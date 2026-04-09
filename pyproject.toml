@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Math utils for Slang"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "slangpy>=0.40.1",
+]
 
 [build-system]
 requires = ["hatchling"]
