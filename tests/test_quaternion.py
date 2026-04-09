@@ -84,7 +84,7 @@ def test_from_axis_angle():
     logger.info(
         f"Testing fromAxisAngle: axis={axis}, angle={angle}, axis_angle={axis_angle}, expected={q_expected}"
     )
-    q_slang = test_module.test_from_axis_angle(spy.math.float3(*axis_angle))
+    q_slang = test_module.test_from_axis_angle(to_slang(axis_angle))
     q_actual = from_slang(q_slang)
     logger.info(f"Result from slang: {q_actual}")
     _assert_quat_close(q_actual, q_expected)
@@ -98,9 +98,7 @@ def test_as_axis_angle():
     axis_angle_expected = glm.axis(q) * glm.angle(q)
     logger.info(f"Testing asAxisAngle: q={q}, expected={axis_angle_expected}")
     axis_angle_slang = test_module.test_as_axis_angle(to_slang(q))
-    axis_angle_actual = glm.vec3(
-        axis_angle_slang.x, axis_angle_slang.y, axis_angle_slang.z
-    )
+    axis_angle_actual = from_slang(axis_angle_slang)
     logger.info(f"Result from slang: {axis_angle_actual}")
     _assert_vec3_close(axis_angle_actual, axis_angle_expected)
 
@@ -113,8 +111,8 @@ def test_rotate():
 
     v_expected = q * v
     logger.info(f"Testing rotate: q={q}, v={v}, expected={v_expected}")
-    v_slang = test_module.test_rotate(to_slang(q), spy.math.float3(*v))
-    v_actual = glm.vec3(v_slang.x, v_slang.y, v_slang.z)
+    v_slang = test_module.test_rotate(to_slang(q), to_slang(v))
+    v_actual = from_slang(v_slang)
     logger.info(f"Result from slang: {v_actual}")
     _assert_vec3_close(v_actual, v_expected)
 
@@ -127,12 +125,6 @@ def test_as_mat3():
     m_expected = glm.mat3_cast(q)
     logger.info(f"Testing asMat3: q={q}, expected={m_expected}")
     m_slang = test_module.test_as_mat3(to_slang(q))
-    m_actual = glm.transpose(
-        glm.mat3(
-            glm.vec3(m_slang[0][0], m_slang[0][1], m_slang[0][2]),
-            glm.vec3(m_slang[1][0], m_slang[1][1], m_slang[1][2]),
-            glm.vec3(m_slang[2][0], m_slang[2][1], m_slang[2][2]),
-        )
-    )
+    m_actual = from_slang(m_slang)
     logger.info(f"Result from slang: {m_actual}")
     _assert_mat3_close(m_actual, m_expected)
