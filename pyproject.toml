@@ -15,7 +15,7 @@ dev = []
 
 [tool.uv.workspace]
 members = [
-  "libs/*",
+  "libs/glm_slang",
   "external/spm"
 ]
 
