@@ -2,36 +2,21 @@ from pathlib import Path
 import logging
 import slangpy as spy
 from pyglm import glm
+from spm.package_manager import SlangPackageManager
 
-from glm_slang import SHADER_PATH as MATH_SHADER_PATH
-from glm_slang import load_module_from_file as load_math_module_from_file
 from glm_slang.conversion import to_slang, from_slang
 
-from common import _assert_quat_close, _assert_vec3_close, _assert_mat3_close
+from common import (
+    GlmSlangTest,
+    _assert_quat_close,
+    _assert_vec3_close,
+    _assert_mat3_close,
+)
 
 logger = logging.getLogger(__name__)
 
-TEST_SHADER_PATH = Path(__file__).parent / "slang"
-
-SHADER_PATHS = [
-    MATH_SHADER_PATH,
-    TEST_SHADER_PATH,
-]
-
-device = spy.create_device(
-    type=spy.DeviceType.automatic,
-    include_paths=SHADER_PATHS,
-)
-
-logger.info(f"Device created: {device}")
-
-math_module = load_math_module_from_file(device=device)
-test_module = spy.Module.load_from_file(
-    device=device,
-    path="test_quaternion.slang",
-    link=[math_module],
-)
-logger.info(f"Modules loaded: {math_module}, {test_module}")
+package_manager = SlangPackageManager()
+test_module = package_manager.module_map[GlmSlangTest.name()]
 
 
 # Test cases for quaternion functions.
@@ -67,7 +52,7 @@ def test_conj():
 
 def test_inv():
     q = glm.normalize(glm.quat(1.0, -2.0, 3.0, -4.0))
-    q_expected = glm.inverse(q)
+    q_expected = glm.quat(glm.inverse(q))
     logger.info(f"Testing inverse: q={q}, expected={q_expected}")
     q_slang = test_module.test_inv(to_slang(q))
     q_actual = from_slang(q_slang)
@@ -109,7 +94,7 @@ def test_rotate():
     q = glm.angleAxis(angle, axis)
     v = glm.vec3(1.0, -0.5, 2.0)
 
-    v_expected = q * v
+    v_expected = glm.vec3(q * v)
     logger.info(f"Testing rotate: q={q}, v={v}, expected={v_expected}")
     v_slang = test_module.test_rotate(to_slang(q), to_slang(v))
     v_actual = from_slang(v_slang)
