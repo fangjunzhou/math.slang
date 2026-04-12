@@ -10,7 +10,8 @@ dependencies = ["glm-slang"]
 dev = []
 
 [tool.uv.workspace]
-members = ["libs/glm_slang", "external/spm"]
+members = ["libs/*"]
 
 [tool.uv.sources]
 glm-slang = { workspace = true }
+spm = { path = "external/spm/libs/spm", editable = true }
