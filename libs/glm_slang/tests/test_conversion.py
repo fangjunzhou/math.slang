@@ -2,7 +2,7 @@ from pathlib import Path
 import logging
 import slangpy as spy
 from pyglm import glm
-from spm.package_manager import SlangPackageManager
+from spm_slang.package_manager import SlangPackageManager
 
 from glm_slang import GlmSlang
 from glm_slang.conversion import to_slang, from_slang

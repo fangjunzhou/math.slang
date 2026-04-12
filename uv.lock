@@ -6,7 +6,6 @@ requires-python = ">=3.12"
 members = [
     "glm-slang",
     "glm-slang-workspace",
-    "spm",
 ]
 
 [[package]]
@@ -69,7 +68,7 @@ source = { editable = "libs/glm_slang" }
 dependencies = [
     { name = "pyglm" },
     { name = "slangpy" },
-    { name = "spm" },
+    { name = "spm-slang" },
 ]
 
 [package.dev-dependencies]
@@ -82,7 +81,7 @@ dev = [
 requires-dist = [
     { name = "pyglm", specifier = ">=2.8.3" },
     { name = "slangpy", specifier = ">=0.40.1" },
-    { name = "spm", editable = "external/spm" },
+    { name = "spm-slang", editable = "external/spm.slang/libs/spm_slang" },
 ]
 
 [package.metadata.requires-dev]
@@ -99,11 +98,20 @@ dependencies = [
     { name = "glm-slang" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "black" },
+    { name = "pytest" },
+]
+
 [package.metadata]
 requires-dist = [{ name = "glm-slang", editable = "libs/glm_slang" }]
 
 [package.metadata.requires-dev]
-dev = []
+dev = [
+    { name = "black", specifier = ">=26.3.1" },
+    { name = "pytest", specifier = ">=9.0.3" },
+]
 
 [[package]]
 name = "iniconfig"
@@ -340,17 +348,11 @@ wheels = [
 ]
 
 [[package]]
-name = "spm"
+name = "spm-slang"
 version = "0.1.0"
-source = { editable = "external/spm" }
+source = { editable = "external/spm.slang/libs/spm_slang" }
 dependencies = [
     { name = "slangpy" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "black" },
-    { name = "pytest" },
 ]
 
 [package.metadata]
@@ -359,7 +361,8 @@ requires-dist = [{ name = "slangpy", specifier = ">=0.40.1" }]
 [package.metadata.requires-dev]
 dev = [
     { name = "black", specifier = ">=26.3.1" },
-    { name = "pytest", specifier = ">=9.0.3" },
+    { name = "build", specifier = ">=1.4.3" },
+    { name = "twine", specifier = ">=6.2.0" },
 ]
 
 [[package]]

@@ -3,7 +3,7 @@ name = "glm-slang"
 version = "0.1.0"
 description = "Math utils for Slang"
 requires-python = ">=3.12"
-dependencies = ["pyglm>=2.8.3", "slangpy>=0.40.1", "spm"]
+dependencies = ["pyglm>=2.8.3", "slangpy>=0.40.1", "spm_slang==0.1.0"]
 
 [build-system]
 requires = ["hatchling"]
