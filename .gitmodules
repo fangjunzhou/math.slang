@@ -1,3 +1,3 @@
-[submodule "external/spm"]
-	path = external/spm
-	url = git@github.com:fangjunzhou/spm.git
+[submodule "external/spm.slang"]
+	path = external/spm.slang
+	url = git@github.com:fangjunzhou/spm.slang.git
