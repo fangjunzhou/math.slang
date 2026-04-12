@@ -1,16 +1,15 @@
-from pathlib import Path
 import logging
-import slangpy as spy
+
 from pyglm import glm
 from spm_slang.package_manager import SlangPackageManager
 
-from glm_slang.conversion import to_slang, from_slang
+from glm_slang.conversion import from_slang, to_slang
+from . import GlmSlangTest
 
-from common import (
-    GlmSlangTest,
+from .common import (
+    _assert_mat3_close,
     _assert_quat_close,
     _assert_vec3_close,
-    _assert_mat3_close,
 )
 
 logger = logging.getLogger(__name__)
@@ -19,14 +18,12 @@ package_manager = SlangPackageManager()
 test_module = package_manager.module_map[GlmSlangTest.name()]
 
 
-# Test cases for quaternion functions.
 def test_identity():
     q = from_slang(test_module.test_identity())
     q_expected = glm.quat(1.0, 0.0, 0.0, 0.0)
     assert q == q_expected, f"Expected {q_expected}, got {q}"
 
 
-# Test multiplication of two quaternions.
 def test_mul():
     a = glm.normalize(glm.quat(1.0, 2.0, 3.0, 4.0))
     b = glm.normalize(glm.quat(5.0, 6.0, 7.0, 8.0))

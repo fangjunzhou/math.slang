@@ -1,0 +1,10 @@
+[project]
+name = "glm-slang-test"
+version = "0.1.0"
+description = "Unit tests for glm.slang"
+requires-python = ">=3.12"
+dependencies = ["glm-slang", "pytest>=9.0.3"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -5,6 +5,7 @@ requires-python = ">=3.12"
 [manifest]
 members = [
     "glm-slang",
+    "glm-slang-test",
     "glm-slang-workspace",
 ]
 
@@ -91,11 +92,27 @@ dev = [
 ]
 
 [[package]]
+name = "glm-slang-test"
+version = "0.1.0"
+source = { editable = "tests/glm_slang" }
+dependencies = [
+    { name = "glm-slang" },
+    { name = "pytest" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "glm-slang", editable = "libs/glm_slang" },
+    { name = "pytest", specifier = ">=9.0.3" },
+]
+
+[[package]]
 name = "glm-slang-workspace"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "glm-slang" },
+    { name = "glm-slang-test" },
 ]
 
 [package.dev-dependencies]
@@ -105,7 +122,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "glm-slang", editable = "libs/glm_slang" }]
+requires-dist = [
+    { name = "glm-slang", editable = "libs/glm_slang" },
+    { name = "glm-slang-test", editable = "tests/glm_slang" },
+]
 
 [package.metadata.requires-dev]
 dev = [

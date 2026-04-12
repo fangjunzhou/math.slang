@@ -1,14 +1,12 @@
-from pathlib import Path
 import logging
-import slangpy as spy
+
 from pyglm import glm
 from spm_slang.package_manager import SlangPackageManager
 
-from glm_slang import GlmSlang
-from glm_slang.conversion import to_slang, from_slang
+from glm_slang.conversion import from_slang, to_slang
+from . import GlmSlangTest
 
-from common import (
-    GlmSlangTest,
+from .common import (
     _assert_mat2_close,
     _assert_mat3_close,
     _assert_mat4_close,
