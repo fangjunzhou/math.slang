@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import overload
 from pyglm import glm
 import slangpy as spy
@@ -35,19 +37,31 @@ def to_slang(v: glm.vec4) -> spy.math.float4:
 
 @overload
 def to_slang(v: glm.mat2) -> spy.math.float2x2:
-    """Convert a glm.mat2 to a spy.math.float2x2 for use in Slang."""
+    """Convert a glm.mat2 to a spy.math.float2x2 for use in Slang.
+
+    :param v: The matrix in glm format.
+    :return: A spy.math.float2x2 representing the same matrix in Slang format.
+    """
     ...
 
 
 @overload
 def to_slang(v: glm.mat3) -> spy.math.float3x3:
-    """Convert a glm.mat3 to a spy.math.float3x3 for use in Slang."""
+    """Convert a glm.mat3 to a spy.math.float3x3 for use in Slang.
+
+    :param v: The matrix in glm format.
+    :return: A spy.math.float3x3 representing the same matrix in Slang format.
+    """
     ...
 
 
 @overload
 def to_slang(v: glm.mat4) -> spy.math.float4x4:
-    """Convert a glm.mat4 to a spy.math.float4x4 for use in Slang."""
+    """Convert a glm.mat4 to a spy.math.float4x4 for use in Slang.
+
+    :param v: The matrix in glm format.
+    :return: A spy.math.float4x4 representing the same matrix in Slang format.
+    """
     ...
 
 
@@ -150,19 +164,31 @@ def from_slang(v: spy.math.float3) -> glm.vec3:
 
 @overload
 def from_slang(v: spy.math.float2x2) -> glm.mat2:
-    """Convert a spy.math.float2x2 in Slang format to a glm.mat2."""
+    """Convert a spy.math.float2x2 in Slang format to a glm.mat2.
+
+    :param v: The matrix in Slang format.
+    :return: A glm.mat2 representing the same matrix.
+    """
     ...
 
 
 @overload
 def from_slang(v: spy.math.float3x3) -> glm.mat3:
-    """Convert a spy.math.float3x3 in Slang format to a glm.mat3."""
+    """Convert a spy.math.float3x3 in Slang format to a glm.mat3.
+
+    :param v: The matrix in Slang format.
+    :return: A glm.mat3 representing the same matrix.
+    """
     ...
 
 
 @overload
 def from_slang(v: spy.math.float4x4) -> glm.mat4:
-    """Convert a spy.math.float4x4 in Slang format to a glm.mat4."""
+    """Convert a spy.math.float4x4 in Slang format to a glm.mat4.
+
+    :param v: The matrix in Slang format.
+    :return: A glm.mat4 representing the same matrix.
+    """
     ...
 
 
@@ -171,6 +197,7 @@ def from_slang(v: spy.math.float4, as_type: type[glm.vec4]) -> glm.vec4:
     """Convert a spy.math.float4 representing a vector in Slang format to a glm.vec4.
 
     :param v: A spy.math.float4 representing the vector in Slang format.
+    :param as_type: Pass ``glm.vec4`` to interpret the float4 as a vector.
     :return: A glm.vec4 representing the same vector.
     """
     ...
@@ -181,6 +208,7 @@ def from_slang(v: spy.math.float4, as_type: type[glm.quat] = glm.quat) -> glm.qu
     """Convert a spy.math.float4 representing a quaternion in Slang format to a glm.quat.
 
     :param v: A spy.math.float4 where (x, y, z) are the vector part and w is the scalar part of the quaternion.
+    :param as_type: Pass ``glm.quat`` (default) to interpret the float4 as a quaternion.
     :return: A glm.quat representing the same quaternion.
     """
     ...

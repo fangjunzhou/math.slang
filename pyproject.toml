@@ -7,7 +7,7 @@ requires-python = ">=3.12"
 dependencies = ["glm-slang", "glm-slang-test"]
 
 [dependency-groups]
-dev = ["pytest>=9.0.3", "black>=26.3.1"]
+dev = ["pytest>=9.0.3", "black>=26.3.1", "sphinx>=8.1.0", "myst-parser>=3.0.1", "furo>=2024.8.6"]
 
 [tool.uv.workspace]
 members = ["libs/*", "tests/*"]
